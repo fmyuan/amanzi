@@ -1,5 +1,5 @@
---- hdf5-1.10.6/config/cmake_ext_mod/HDFMacros.cmake	2019-12-17 14:14:09.000000000 -0800
-+++ hdf5-1.10.6-new/config/cmake_ext_mod/HDFMacros.cmake	2020-03-25 21:12:10.256059664 -0700
+--- hdf5-1.12.1/config/cmake_ext_mod/HDFMacros.cmake	2019-12-17 14:14:09.000000000 -0800
++++ hdf5-1.12.1-new/config/cmake_ext_mod/HDFMacros.cmake	2020-03-25 21:12:10.256059664 -0700
 @@ -379,17 +379,21 @@
    set (CMAKE_INSTALL_RPATH_USE_LINK_PATH  FALSE)
    # add the automatically determined parts of the RPATH
