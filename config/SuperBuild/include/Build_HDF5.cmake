@@ -28,7 +28,8 @@ configure_file(${SuperBuild_TEMPLATE_FILES_DIR}/hdf5-patch-step.cmake.in
 set(HDF5_PATCH_COMMAND ${CMAKE_COMMAND} -P ${HDF5_cmake_patch})     
 
 # --- Define configure parameters
-set(HDF5_CMAKE_CACHE_ARGS "-DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS}")
+set(HDF5_CMAKE_CACHE_ARGS "-DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS}"
+                          "-DCMAKE_C_FLAGS:STRING=-DgFortran -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 ")
 if ( (${AMANZI_ARCH_NERSC} OR ${AMANZI_ARCH_CHICOMA}) AND (NOT BUILD_SHARED_LIBS))
    list(APPEND HDF5_CMAKE_CACHE_ARGS "-DBUILD_STATIC_EXECS:BOOL=ON")
 endif()
@@ -67,6 +68,8 @@ ExternalProject_Add(${HDF5_BUILD_TARGET}
                                   -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
                                   -DCMAKE_CXX_FLAGS:STRING=${Amanzi_COMMON_CXXFLAGS}
                                   -DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}
+                                  -DCMAKE_Fortran_FLAGS:STRING=${Amanzi_COMMON_FCFLAGS}
+                                  -DCMAKE_Fortran_COMPILER:FILEPATH=${CMAKE_Fortran_COMPILER}
                     # -- Build
                     BINARY_DIR        ${HDF5_build_dir}           # Build directory 
                     BUILD_COMMAND     $(MAKE)                     # $(MAKE) enables parallel builds through make
@@ -82,17 +85,23 @@ include(BuildLibraryName)
 if ( ${CMAKE_BUILD_TYPE} STREQUAL "Debug" )
   build_library_name(hdf5_debug HDF5_C_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
   build_library_name(hdf5_hl_debug HDF5_HL_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
+  build_library_name(hdf5_fortran_debug HDF5_FORTRAN_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
+  build_library_name(hdf5_hl_fortran_debug HDF5_HL_FORTRAN_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
 else()
   build_library_name(hdf5 HDF5_C_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
   build_library_name(hdf5_hl HDF5_HL_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
+  build_library_name(hdf5_fortran HDF5_FORTRAN_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
+  build_library_name(hdf5_hl_fortran HDF5_HL_FORTRAN_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
 endif()
   
-set(HDF5_LIBRARIES ${HDF5_HL_LIBRARY} ${HDF5_C_LIBRARY} ${ZLIB_LIBRARIES} m dl)
+set(HDF5_LIBRARIES ${HDF5_HL_FORTRAN_LIBRARY} ${HDF5_FORTRAN_LIBRARY} ${HDF5_HL_LIBRARY} ${HDF5_C_LIBRARY} ${ZLIB_LIBRARIES} m dl)
 set(HDF5_INCLUDE_DIRS ${TPL_INSTALL_PREFIX}/include ${ZLIB_INCLUDE_DIRS})
 list(REMOVE_DUPLICATES HDF5_INCLUDE_DIRS)
 
 message(STATUS "\t HDF5:  HDF5_HL_LIBRARY = ${HDF5_HL_LIBRARY}")
 message(STATUS "\t        HDF5_C_LIBRARY  = ${HDF5_C_LIBRARY}")
+message(STATUS "\t        HDF5_HL_FORTRAN_LIBRARY = ${HDF5_HL_FORTRAN_LIBRARY}")
+message(STATUS "\t        HDF5_FORTRAN_LIBRARY  = ${HDF5_FORTRAN_LIBRARY}")
 message(STATUS "\t        ZLIB_LIBRARIES  = ${ZLIB_LIBRARIES}")
 
 set(HDF5_DIR ${TPL_INSTALL_PREFIX})
