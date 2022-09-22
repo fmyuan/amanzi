@@ -49,6 +49,7 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --tools-install-prefix=${ATS_BASE}/install \
    --with-cmake=`which cmake` \
    --with-ctest=`which ctest` \
+   --with-python=`which python` \
    --branch_ats=${ATS_VERSION} \
    --parallel=6
 
