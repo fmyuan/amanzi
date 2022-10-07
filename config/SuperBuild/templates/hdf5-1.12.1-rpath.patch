@@ -1,5 +1,5 @@
---- hdf5-1.10.6/config/cmake_ext_mod/HDFMacros.cmake	2019-12-17 14:14:09.000000000 -0800
-+++ hdf5-1.10.6-new/config/cmake_ext_mod/HDFMacros.cmake	2020-03-25 21:12:10.256059664 -0700
+--- hdf5-1.12.1/config/cmake_ext_mod/HDFMacros.cmake	2019-12-17 14:14:09.000000000 -0800
++++ hdf5-1.12.1-new/config/cmake_ext_mod/HDFMacros.cmake	2020-03-25 21:12:10.256059664 -0700
 @@ -379,17 +379,21 @@
    set (CMAKE_INSTALL_RPATH_USE_LINK_PATH  FALSE)
    # add the automatically determined parts of the RPATH
@@ -30,9 +30,9 @@
    endif ()
  
    if (DEFINED ADDITIONAL_CMAKE_PREFIX_PATH AND EXISTS "${ADDITIONAL_CMAKE_PREFIX_PATH}")
---- hdf5-1.10.6/m4/aclocal_fc.f90       2019-10-18 09:38:06.000000000 -0400
-+++ hdf5-1.10.6-new/m4/aclocal_fc.f90   2022-04-18 08:59:41.000000000 -0400
-@@ -138,6 +138,7 @@
+--- hdf5-1.12.1/m4/aclocal_fc.f90       2019-10-18 09:38:06.000000000 -0400
++++ hdf5-1.12.1-new/m4/aclocal_fc.f90   2022-04-18 08:59:41.000000000 -0400
+@@ -151,6 +151,7 @@
       WRITE(8,'(I0)') max_decimal_prec
       WRITE(8,'(I0)') num_ikinds
       WRITE(8,'(I0)') num_rkinds
