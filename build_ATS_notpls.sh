@@ -41,13 +41,10 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --enable-petsc \
    --disable-amanzi_physics \
    --enable-ats_physics \
-   --disable-ats_dev \
    --enable-geochemistry --enable-alquimia --enable-pflotran --enable-crunchtope \
    --amanzi-install-prefix=${AMANZI_DIR} \
    --amanzi-build-dir=${AMANZI_BUILD_DIR} \
-   --tpl-install-prefix=${AMANZI_TPLS_DIR} \
-   --tpl-build-dir=${AMANZI_TPLS_BUILD_DIR} \
-   --tpl-download-dir=${ATS_BASE}/Downloads/amanzi-tpls \
+   --tpl-config-file=${AMANZI_TPLS_DIR}/share/cmake/amanzi-tpl-config.cmake \
    --tools-download-dir=${ATS_BASE}/Downloads/tools \
    --tools-build-dir=${AMANZI_TPLS_BUILD_DIR}/tools \
    --tools-install-prefix=${AMANZI_TPLS_DIR}/tools \
@@ -56,7 +53,7 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --with-python=`which python3` \
    --branch_ats=${ATS_VERSION} \
    --parallel=6
-
+   
 
 # If TPLs have already been built, and you don't want to go 
 # through that long process again, replace
