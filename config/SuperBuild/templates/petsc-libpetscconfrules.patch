@@ -1,0 +1,11 @@
+--- petsc-v3.16.0-6ac0d874b4dc24d79da11591e20a052fa2042d84/lib/petsc/conf/rules	2021-09-29 19:30:02.000000000 -0400
++++ petsc-3.16-source/lib/petsc/conf/rules	2024-02-22 21:42:01.000000000 -0500
+@@ -47,7 +47,7 @@
+ 	@${MKDIR} -p ${PETSC_DIR}/${PETSC_ARCH}/tests && touch -t 197102020000 ${PETSC_DIR}/${PETSC_ARCH}/tests/testfiles
+ 
+ libs: ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/files ${PETSC_DIR}/${PETSC_ARCH}/tests/testfiles
+-	+@cd ${PETSC_DIR} && MAKEFLAGS="-j$(MAKE_NP) -l$(MAKE_LOAD) $(MAKEFLAGS)" ${OMAKE_PRINTDIR} -f gmakefile ${MAKE_PAR_OUT_FLG} V=${V} libs
++	+@cd ${PETSC_DIR} && MAKEFLAGS="-j$(MAKE_NP) -l$(MAKE_LOAD)" ${OMAKE_PRINTDIR} -f gmakefile ${MAKE_PAR_OUT_FLG} V=${V} libs
+ 
+ # Does nothing; needed for some rules that require actions.
+ foo:
