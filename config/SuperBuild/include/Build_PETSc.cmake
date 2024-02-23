@@ -117,7 +117,7 @@ set(petsc_hypre_flags --with-hypre=1 --with-hypre-dir=${TPL_INSTALL_PREFIX})
 set(petsc_superlu_flags --with-superlu=1 --with-superlu-dir=${TPL_INSTALL_PREFIX})
 set(petsc_superlu_dist_flags --with-superlu_dist=1 --with-superlu_dist-dir=${TPL_INSTALL_PREFIX})
 # hdf5 included in petsc for building pflotran full-package
-set(petsc_hdf5_flags  --with-hdf5=1 --with-hdf5-dir=${TPL_INSTALL_PREFIX} --download-hdf5-fortran-bindings=1)
+set(petsc_hdf5_flags  --with-hdf5=1 --with-hdf5-dir=${TPL_INSTALL_PREFIX} --download-hdf5-fortran-bindings=1 --with-fortran-bindings=1)
 
 set(petsc_package_flags ${petsc_hypre_flags} ${petsc_superlu_dist_flags} ${petsc_superlu_flags}
                         ${petsc_parmetis_flags} ${petsc_sowing_flags} ${petsc_metis_flags}
@@ -158,7 +158,7 @@ message(STATUS ">>> Build_PETSc -- MPI COMPILERS: ${petsc_mpi_compilers}")
 
 # --- Set the name of the patch
 # set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch petsc-hypre.patch)
-set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch)
+set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch petsc-libpetscconfrules.patch)
 # --- Configure the bash patch script
 set(PETSc_sh_patch ${PETSc_prefix_dir}/petsc-patch-step.sh)
 configure_file(${SuperBuild_TEMPLATE_FILES_DIR}/petsc-patch-step.sh.in
