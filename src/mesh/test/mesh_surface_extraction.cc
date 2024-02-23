@@ -200,12 +200,13 @@ TEST(MESH_SURFACE_EXTRACTION_GENERATED_EXTRACTED_MANIFOLD)
     fac.set_preference({ frm });
 
     // cache all, even edges here because Manifold needs them
+    std::vector<std::string> setnames{ "Top Face Plane" };
     auto parent_mesh_cache = Teuchos::rcp(
       new Mesh(parent_mesh, Teuchos::rcp(new AmanziMesh::MeshAlgorithms()), Teuchos::null));
     cacheAll(*parent_mesh_cache);
 
     auto mesh = fac.create(parent_mesh_cache,
-                           std::vector<std::string>({ "Top Face Plane" }),
+                           setnames,
                            AmanziMesh::Entity_kind::FACE,
                            true);
     cacheAll(*mesh);
@@ -273,12 +274,13 @@ TEST(MESH_SURFACE_EXTRACTION_EXO_EXTRACTED_MANIFOLD)
 
     MeshFactory fac(comm, gm, fac_plist);
     fac.set_preference({ frm });
+    std::vector<std::string> setnames{ "Top Face Plane" };
     auto parent_mesh_cache = Teuchos::rcp(
       new Mesh(parent_mesh, Teuchos::rcp(new AmanziMesh::MeshAlgorithms()), Teuchos::null));
     cacheAll(*parent_mesh_cache);
 
     auto mesh = fac.create(parent_mesh_cache,
-                           std::vector<std::string>({ "Top Face Plane" }),
+                           setnames,
                            AmanziMesh::Entity_kind::FACE,
                            true);
     cacheAll(*mesh);

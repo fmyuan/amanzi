@@ -175,13 +175,14 @@ TEST(MESH_FRACTURE_EXTRACTION_EXO)
       createFrameworkUnstructured(Preference{ frm }, "test/mesh_extracted_fracture.exo", comm, gm);
 
     // extract the fractures
+    std::vector<std::string> setnames{ "fractures-two" };
     MeshFactory fac(comm, gm);
     fac.set_preference({ frm });
     auto parent_mesh_cache = Teuchos::rcp(
       new Mesh(parent_mesh, Teuchos::rcp(new AmanziMesh::MeshAlgorithms()), Teuchos::null));
     cacheAll(*parent_mesh_cache);
     auto mesh = fac.create(parent_mesh_cache,
-                           std::vector<std::string>({ "fractures-two" }),
+                           setnames,
                            AmanziMesh::Entity_kind::FACE,
                            false);
     cacheAll(*mesh);
