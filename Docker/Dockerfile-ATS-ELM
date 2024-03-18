@@ -90,3 +90,7 @@ RUN mkdir /home/amanzi_user/work
 # Unset proxy
 ENV https_proxy= \
     http_proxy=
+
+# Copy E3SM into container
+ADD E3SM-ats /home/amanzi_user/E3SM
+

@@ -49,6 +49,13 @@ echo ""
 # MPI_FLAVOR=openmpi
 MPI_FLAVOR=mpich
 
-docker build --no-cache --build-arg ats_branch=rfiorella/elm_api --build-arg ats_tests_branch=ats-regression-tests-1.4 --build-arg amanzi_branch=${AMANZI_BRANCH} --build-arg amanzi_tpls_ver=${AMANZI_TPLS_VER} --build-arg mpi_flavor=${MPI_FLAVOR} --progress=plain -f ${AMANZI_SOURCE_DIR}/Docker/Dockerfile-ATS-ELM -t metsi/ats:rfiorella-elm_api-1.4-amd64 .
+docker build --no-cache --build-arg ats_branch=rfiorella/elm_api \
+	--build-arg ats_tests_branch=ats-regression-tests-1.4 \
+	--build-arg amanzi_branch=${AMANZI_BRANCH} \
+	--build-arg amanzi_tpls_ver=${AMANZI_TPLS_VER} \
+	--build-arg mpi_flavor=${MPI_FLAVOR} \
+	--progress=plain \
+	-f ${AMANZI_SOURCE_DIR}/Docker/Dockerfile-ATS-ELM \
+	-t metsi/ats:rfiorella-elm_api-1.4-amd64 ../..
 
 
