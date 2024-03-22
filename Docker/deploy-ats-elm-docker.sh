@@ -49,7 +49,7 @@ echo ""
 # MPI_FLAVOR=openmpi
 MPI_FLAVOR=mpich
 
-docker build --no-cache --build-arg ats_branch=rfiorella/elm_api \
+docker build --build-arg ats_branch=rfiorella/elm_api \
 	--build-arg ats_tests_branch=ats-regression-tests-1.4 \
 	--build-arg amanzi_branch=${AMANZI_BRANCH} \
 	--build-arg amanzi_tpls_ver=${AMANZI_TPLS_VER} \
