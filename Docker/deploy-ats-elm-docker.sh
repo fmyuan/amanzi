@@ -15,8 +15,8 @@ get_tpl_version()
    echo "${tpl_version_major}.${tpl_version_minor}.${tpl_version_patch}"
 }
 
-AMANZI_BRANCH=amanzi-1.4
-AMANZI_SOURCE_DIR=~/repos/amanzi
+AMANZI_BRANCH=master
+AMANZI_SOURCE_DIR=~/repos/amanzi-main
 AMANZI_TPLS_VER=`get_tpl_version`
 
 ATS_SOURCE_DIR=$AMANZI_SOURCE_DIR/src/physics/ats
@@ -56,6 +56,6 @@ docker build --build-arg ats_branch=rfiorella/elm_api \
 	--build-arg mpi_flavor=${MPI_FLAVOR} \
 	--progress=plain \
 	-f ${AMANZI_SOURCE_DIR}/Docker/Dockerfile-ATS-ELM \
-	-t metsi/ats:rfiorella-elm_api-1.4-amd64 ../..
+	-t metsi/ats:rfiorella-elm_api-1.4-arm64 ../..
 
 
