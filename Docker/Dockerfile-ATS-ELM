@@ -111,7 +111,7 @@ RUN apt-get -q update -y && apt-get install -y \
     && mv /bin/sh /bin/sh.orig \
     && ln -s /bin/bash /bin/sh \
     && wget https://www.python.org/ftp/python/3.8.18/Python-3.8.18.tgz \
-    && tar xvf Python-3.8.18.tgz \ 
+    && tar xvf Python-3.8.18.tgz \
     && cd Python-3.8.18 \
     && ./configure && make && make install \
     && cd ../ && rm -r Python-3.8.18* \
@@ -123,7 +123,7 @@ RUN apt-get -q update -y && apt-get install -y \
     && git clone -b compass-glm --depth=1 https://github.com/rfiorella/pt-e3sm-inputdata work/inputdata/ \
     && mkdir -p work/cases \
     && mkdir -p work/output \
-    && chown -R amanzi_user:amanzi_user work/
+    && chown -R amanzi_user:amanzi_user work
 USER amanzi_user
 
 ENV CASE_NAME=/home/amanzi_user/work/output/f19_g16.IGSWELMBGC \
