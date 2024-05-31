@@ -14,7 +14,9 @@ amanzi_tpl_version_write(FILENAME ${TPL_VERSIONS_INCLUDE_FILE}
                          VERSION ${Nanoflann_VERSION_MAJOR} ${Nanoflann_VERSION_MINOR} ${Nanoflann_VERSION_PATCH})
 
 # --- Set the name of the patch
-set(Nanoflann_patch_file nanoflann-cstdint-gcc13.patch)
+set(Nanoflann_patch_file nanoflann-cstdint-gcc13.patch
+                         nanoflann-apple-arm64.patch
+                         )
 # --- Configure the bash patch script
 set(Nanoflann_sh_patch ${Nanoflann_prefix_dir}/nanoflann-patch-step.sh)
 configure_file(${SuperBuild_TEMPLATE_FILES_DIR}/nanoflann-patch-step.sh.in
