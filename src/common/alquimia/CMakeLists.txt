@@ -37,4 +37,7 @@ add_amanzi_library(geochemistry
                    SOURCE ${chem_src_files}
                    HEADERS ${chem_inc_files}
                    LINK_LIBS ${GEOCHEM_SUPPORT_LIBS} ${Epetra_LIBRARIES})
+if (APPLE)
+  set_target_properties(geochemistry PROPERTIES LINK_FLAGS "-ld_classic")
+endif()
 

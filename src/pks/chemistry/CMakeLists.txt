@@ -72,6 +72,10 @@ add_amanzi_library(chemistry_pk
                    LINK_LIBS ${GEOCHEM_LIBS} pks ${Epetra_LIBRARIES}
                              ${XERCES_LIBRARIES} ${XERCES_ICU_LIBRARIES})
 
+if (APPLE)
+  set_target_properties(chemistry_pk PROPERTIES LINK_FLAGS "-ld_classic")
+endif()
+
 if (BUILD_TESTS AND ENABLE_Unstructured)
     # Add UnitTest include directory
     include_directories(${UnitTest_INCLUDE_DIRS})
@@ -98,6 +102,12 @@ if (BUILD_TESTS AND ENABLE_Unstructured)
                               ${XERCES_LIBRARIES} ${XERCES_ICU_LIBRARIES} ${NOX_LIBRARIES}
                               ${HYPRE_LIBRARY})
 
+
+    if (APPLE)
+      set_target_properties(chemistry_amanzi_pk PROPERTIES LINK_FLAGS "-ld_classic")
+    endif()
+
+
     if (ENABLE_ALQUIMIA)
       add_amanzi_test(chemistry_alquimia_pk chemistry_alquimia_pk
                       KIND int
@@ -107,6 +117,12 @@ if (BUILD_TESTS AND ENABLE_Unstructured)
                                 ${UnitTest_LIBRARIES} ${Teuchos_LIBRARIES} ${Epetra_LIBRARIES}
                                 ${HDF5_LIBRARIES} ${XERCESC_LIBRARIES} ${XERCES_ICU_LIBRARIES}
                                 ${NOX_LIBRARIES})
+
+
+      if (APPLE)
+        set_target_properties(chemistry_alquimia_pk PROPERTIES LINK_FLAGS "-ld_classic")
+      endif()
+
     endif()
 
     if (ENABLE_AmanziPhysicsModule)
@@ -122,5 +138,10 @@ if (BUILD_TESTS AND ENABLE_Unstructured)
                               ${UnitTest_LIBRARIES} ${Teuchos_LIBRARIES} ${Epetra_LIBRARIES}
                               ${HDF5_LIBRARIES} ${XERCESC_LIBRARIES} ${XERCES_ICU_LIBRARIES}
                               ${NOX_LIBRARIES})
+
+      if (APPLE)
+        set_target_properties(chemistry_benchmarks_1d PROPERTIES LINK_FLAGS "-ld_classic")
+      endif()
+
     endif()
 endif()

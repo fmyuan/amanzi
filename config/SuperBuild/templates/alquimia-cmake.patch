@@ -76,6 +76,7 @@
 +if (APPLE)
    set(SYS_FLAGS "-DAPPLE=1")
    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Accelerate")
++  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -ld_classic")
  else ()
 -  if (LINUX EQUAL 1)
 +  if (LINUX)
