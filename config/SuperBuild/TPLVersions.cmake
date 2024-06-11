@@ -267,15 +267,14 @@ set(XERCES_MD5_SUM        7b1394c32abbdd87841d94a8404c2ac6)
 #
 # TPL: OpenMPI
 #
-set(OpenMPI_VERSION_MAJOR 3)
+set(OpenMPI_VERSION_MAJOR 4)
 set(OpenMPI_VERSION_MINOR 1)
-set(OpenMPI_VERSION_PATCH 4)
+set(OpenMPI_VERSION_PATCH 6)
 set(OpenMPI_VERSION ${OpenMPI_VERSION_MAJOR}.${OpenMPI_VERSION_MINOR}.${OpenMPI_VERSION_PATCH})
-set(OpenMPI_URL_STRING     "https://www.open-mpi.org/software/ompi/v3.1/downloads/")
+set(OpenMPI_URL_STRING     "https://www.open-mpi.org/software/ompi/v4.1/downloads/")
 set(OpenMPI_ARCHIVE_FILE   openmpi-${OpenMPI_VERSION}.tar.bz2)
 set(OpenMPI_SAVEAS_FILE    ${OpenMPI_ARCHIVE_FILE})
-set(OpenMPI_MD5_SUM        29770c6efcbb4c41d820cb6b8eae90b8)
-
+set(OpenMPI_MD5_SUM        c9b1c974cfc23c77c0fbdb965cd58a1c)
 #
 # TPL: MPICH
 #
