@@ -3,8 +3,7 @@
 # with options configured for an ATS build
 
 # see INSTALL_ATS.md for more information
-#source ~/.zshrc_amanzitpls
-source ~/.zshrc_elmats
+source ~/.zshrc_amanzitpls
 
 if [ ${ATS_BUILD_TYPE} == Debug ] ;
 then
@@ -50,7 +49,9 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --enable-test_suites \
    --amanzi-install-prefix=${AMANZI_DIR} \
    --amanzi-build-dir=${AMANZI_BUILD_DIR} \
-   --tpl-config-file=${AMANZI_TPLS_DIR}/share/cmake/amanzi-tpl-config.cmake \
+   --tpl-install-prefix=${AMANZI_TPLS_DIR} \
+   --tpl-build-dir=${AMANZI_TPLS_BUILD_DIR} \
+   --tpl-download-dir=${ATS_BASE}/Downloads/amanzi-tpls \
    --tools-download-dir=${ATS_BASE}/Downloads/tools \
    --tools-build-dir=${AMANZI_TPLS_BUILD_DIR}/tools \
    --tools-install-prefix=${AMANZI_TPLS_DIR}/tools \
@@ -58,7 +59,13 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --with-ctest=`which ctest` \
    --with-python=`which python3` \
    --branch_ats=${ATS_VERSION} \
-   --parallel=1
+   --parallel=2
+
+# if alreeady have MPI on your system
+#   --with-mpi=${MPI_ROOT} --tools-mpi=mpich \
+
+# if building MPI by TPLs (default: openmpi)
+#   --tools-mpi=openmpi \
 
 
 # If TPLs have already been built, and you don't want to go 
