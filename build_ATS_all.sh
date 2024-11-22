@@ -25,6 +25,9 @@ echo " with build type: ${ATS_BUILD_TYPE}"
 echo ""
 
 
+echo "unset $PETSC_DIR: "
+unset PETSC_DIR
+unset PETSC_ARCH
 echo "$PETSC_DIR "
 echo "$PETSC_ARCH "
 
@@ -40,25 +43,30 @@ ${AMANZI_SRC_DIR}/bootstrap.sh \
    --enable-petsc \
    --disable-amanzi_physics \
    --enable-ats_physics \
-   --disable-elm_ats_api \
-   --enable-ats_dev \
+   --enable-elm_ats_api \
+   --ats_dev \
    --enable-geochemistry --enable-alquimia --enable-pflotran --enable-crunchtope \
    --enable-reg_tests \
    --enable-test_suites \
    --amanzi-install-prefix=${AMANZI_DIR} \
    --amanzi-build-dir=${AMANZI_BUILD_DIR} \
-   --tpl-config-file=${AMANZI_TPLS_DIR}/share/cmake/amanzi-tpl-config.cmake \
+   --tpl-install-prefix=${AMANZI_TPLS_DIR} \
+   --tpl-build-dir=${AMANZI_TPLS_BUILD_DIR} \
+   --tpl-download-dir=${ATS_BASE}/Downloads/amanzi-tpls \
    --tools-download-dir=${ATS_BASE}/Downloads/tools \
    --tools-build-dir=${AMANZI_TPLS_BUILD_DIR}/tools \
    --tools-install-prefix=${AMANZI_TPLS_DIR}/tools \
    --with-cmake=`which cmake` \
    --with-ctest=`which ctest` \
    --with-python=`which python3` \
-   --with-c-flags=-O0 \
-   --with-cxx-flags=-O0 \
-   --with-fort-flags=-O0 \
    --branch_ats=${ATS_VERSION} \
    --parallel=6
+
+# if alreeady have MPI on your system
+#   --with-mpi=${MPI_ROOT} --tools-mpi=mpich \
+
+# if building MPI by TPLs (default: openmpi)
+#   --tools-mpi=openmpi \
 
 
 # If TPLs have already been built, and you don't want to go 
