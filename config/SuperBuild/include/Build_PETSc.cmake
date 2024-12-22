@@ -61,11 +61,13 @@ endforeach()
 # Use the common cflags, cxxflags
 include(BuildWhitespaceString)
 build_whitespace_string(petsc_cflags
-                       ${Amanzi_COMMON_CFLAGS})
+                       ${Amanzi_COMMON_CFLAGS}
+                       -fno-rtlib-add-rpath)
 
 build_whitespace_string(petsc_cxxflags
-                       ${Amanzi_COMMON_CXXFLAGS})
-set(cpp_flag_list 
+                       ${Amanzi_COMMON_CXXFLAGS}
+                       -fno-rtlib-add-rpath)
+set(cpp_flag_list
     ${Amanzi_COMMON_CFLAGS}
     ${Amanzi_COMMON_CXXFLAGS}
     ${Amanzi_COMMON_FCFLAGS})
