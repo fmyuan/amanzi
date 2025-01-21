@@ -1,0 +1,11 @@
+--- petsc-3.20-source_orig/config/BuildSystem/config/setCompilers.py    2023-09-28 18:01:16
++++ petsc-3.20-source/config/BuildSystem/config/setCompilers.py 2024-12-21 15:10:19
+@@ -2435,7 +2435,7 @@
+       languages.append('FC')
+     for language in languages:
+       self.pushLanguage(language)
+-      for testFlag in ['-Wl,-ld_classic', '-Wl,-bind_at_load', '-Wl,-commons,use_dylibs', '-Wl,-search_paths_first', '-Wl,-no_compact_unwind']:
++      for testFlag in ['-Wl,-bind_at_load', '-Wl,-commons,use_dylibs', '-Wl,-search_paths_first', '-Wl,-no_compact_unwind']:
+         if self.checkLinkerFlag(testFlag, filterAlways=1):
+           # expand to CC_LINKER_FLAGS or CXX_LINKER_FLAGS or FC_LINKER_FLAGS
+           linker_flag_var = langMap[language]+'_LINKER_FLAGS'
