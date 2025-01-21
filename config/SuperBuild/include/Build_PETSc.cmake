@@ -61,11 +61,12 @@ endforeach()
 # Use the common cflags, cxxflags
 include(BuildWhitespaceString)
 build_whitespace_string(petsc_cflags
-                       ${Amanzi_COMMON_CFLAGS})
+                       ${Amanzi_COMMON_CFLAGS}
+                       -fno-rtlib-add-rpath)
 
 build_whitespace_string(petsc_cxxflags
-                       ${Amanzi_COMMON_CXXFLAGS})
-set(cpp_flag_list 
+                       ${Amanzi_COMMON_CXXFLAGS} -fno-rtlib-add-rpath)
+set(cpp_flag_list
     ${Amanzi_COMMON_CFLAGS}
     ${Amanzi_COMMON_CXXFLAGS})
 list(REMOVE_DUPLICATES cpp_flag_list)
@@ -152,7 +153,7 @@ message(STATUS ">>> Build_PETSc -- MPI COMPILERS: ${petsc_mpi_compilers}")
 
 # --- Set the name of the patch
 # set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch petsc-hypre.patch)
-set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch)
+set(PETSc_patch_file petsc-cmake.patch petsc-duplicate-libmpi.patch petsc-hypre.patch petsc-setcompilerspy.patch)
 # --- Configure the bash patch script
 set(PETSc_sh_patch ${PETSc_prefix_dir}/petsc-patch-step.sh)
 configure_file(${SuperBuild_TEMPLATE_FILES_DIR}/petsc-patch-step.sh.in
@@ -195,6 +196,7 @@ ExternalProject_Add(${PETSc_BUILD_TARGET}
                               ${petsc_lapack_option}
                               ${petsc_blas_option}
                               ${petsc_package_flags}
+                              PETSC_DIR=${PETSc_source_dir}
                     # -- Build
                     BINARY_DIR       ${PETSc_build_dir}           # Build directory 
                     BUILD_COMMAND    $(MAKE) -j 1 PETSC_DIR=${PETSc_source_dir} # Run the CMake script to build
