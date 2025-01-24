@@ -1,5 +1,5 @@
---- alquimia-dev-1.0.5/CMakeLists.txt	2017-09-20 11:18:31.000000000 -0600
-+++ alquimia-1.0.5-source/CMakeLists.txt	2018-02-28 16:40:45.000000000 -0700
+--- CMakeLists.txt	2023-10-18 23:35:15
++++ CMakeLists_patch.txt	2025-01-24 17:17:40
 @@ -10,11 +10,7 @@
  option(XSDK_ENABLE_DEBUG "Enables Debug mode builds [OFF]." OFF)
  option(BUILD_SHARED_LIBS "Builds shared libraries [ON]." ON)
@@ -104,7 +104,7 @@
    list(APPEND ALQUIMIA_ENGINES crunchflow)
    set(ALQUIMIA_HAVE_CRUNCHFLOW 1)
    set(ALQUIMIA_NEED_PETSC 1)
-@@ -185,17 +181,16 @@
+@@ -185,17 +181,20 @@
  
  # If needed, Check for PETSc and set things up.
  if (ALQUIMIA_NEED_PETSC)
@@ -116,6 +116,10 @@
    if(DEFINED ENV{PETSC_ARCH})
 -    set(PETSC_ARCH $ENV{PETSC_ARCH})
 +    set(PETSC_ARCH ${PETSC_ARCH})
++  elseif(PETSC_DIR)
++    set(TPL_PETSC_INCLUDE_DIRS ${PETSC_DIR}/include)
++    set(TPL_PETSC_LDFLAGS -L${PETSC_DIR}/lib -lpetsc)
++    set(TPL_PETSC_LIBRARIES ${PETSC_LIBRARIES})
    endif()
  
    message(STATUS "--- SM: PETSC_DIR >>> ${PETSC_DIR}")
@@ -125,7 +129,7 @@
    # Do we have settings for PETSc's libraries/includes?
    if (TPL_PETSC_INCLUDE_DIRS)
      if (NOT TPL_PETSC_LDFLAGS)
-@@ -215,17 +210,18 @@
+@@ -215,17 +214,18 @@
        endif()
      endforeach()
  
@@ -149,7 +153,7 @@
    endif()
    if (NOT PETSC_FOUND)
      message(FATAL_ERROR "PETSc was not found.")
-@@ -241,6 +237,12 @@
+@@ -241,6 +241,12 @@
    message(STATUS "--- SM: cmake install rpath")
  endif()
  
@@ -162,13 +166,3 @@
  # Include the binary directory in the header file search path,
  # since it's where we place generated files.
  include_directories("${PROJECT_BINARY_DIR}")
---- alquimia-dev-1.0.5/alquimia/CMakeLists.txt	2017-09-20 11:18:31.000000000 -0600
-+++ alquimia-1.0.5-source/alquimia/CMakeLists.txt	2018-02-26 17:58:38.000000000 -0700
-@@ -20,6 +20,7 @@
- 
- # CrunchFlow engine.
- if (ALQUIMIA_HAVE_CRUNCHFLOW)
-+  list(APPEND ALQUIMIA_TPLS ${LAPACK_LIBRARIES})
-   list(APPEND ALQUIMIA_TPLS ${TPL_CRUNCHFLOW_LIBRARIES})
-   list(APPEND ALQUIMIA_INCLUDE_DIRS ${TPL_CRUNCHFLOW_INCLUDE_DIRS})
-   list(APPEND ALQUIMIA_SOURCES crunch_alquimia_interface.F90 crunch_alquimia_wrappers.F90)
