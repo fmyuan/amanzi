@@ -1,0 +1,17 @@
+diff --color -rau alquimia-dev-1.2.0/alquimia/pflotran_alquimia_interface.F90  alquimia-1.2.0-source/alquimia/pflotran_alquimia_interface.F90
+--- alquimia-dev-1.2.0/alquimia/pflotran_alquimia_interface.F90	2023-10-18 23:35:15
++++ alquimia-1.2.0-source/alquimia/pflotran_alquimia_interface.F90	2024-05-30 00:48:04
+@@ -69,8 +69,10 @@
+   use Transport_Constraint_RT_module, only : tran_constraint_coupler_rt_type
+ 
+   use PFLOTRAN_Constants_module
+-#include "finclude/petscsys.h"
++
++!#include "finclude/petscsys.h"
+ #include "petsc/finclude/petscsys.h"
++
+   implicit none
+ 
+   public :: Setup, &
+
+

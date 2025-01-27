@@ -20,6 +20,7 @@ set(Alquimia_patch_file alquimia-cmake.patch
                         alquimia-FindPETSc.patch
                         alquimia-MPIlocation.patch
                         alquimia-cmake2.patch
+                        alquimia-petsc-finclude.patch
                         )
 patch_tpl(Alquimia
           ${Alquimia_prefix_dir}
