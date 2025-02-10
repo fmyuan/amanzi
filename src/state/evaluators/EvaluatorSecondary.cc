@@ -161,6 +161,14 @@ EvaluatorSecondary::EnsureEvaluators(State& S)
   // next make sure that all dependencies have evaluators, and call
   // EnsureEvaluators recursively to fill out the dependency graph
   for (const auto& dep : dependencies_) {
+    // excluding primary key and flux key, which outside State?
+    // (TODO) better NOT using hard-weired 'pressure', preferring something like
+    // primary key string
+	if (dep.first == "pressure" or dep.first == "surface-pressure" or
+		dep.first == "mass_flux" or dep.first == "darcy_flux") {
+	  return;
+	}
+
     auto& dep_eval = S.RequireEvaluator(dep.first, dep.second);
     dep_eval.EnsureEvaluators(S);
   }
