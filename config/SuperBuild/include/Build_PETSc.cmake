@@ -191,10 +191,13 @@ ExternalProject_Add(${PETSc_BUILD_TARGET}
                               --without-valgrind
                               --with-cxx-dialect=C++14
                               --with-hdf5-dir=${TPL_INSTALL_PREFIX}
+                              --with-fortran-bindings=1
+                              --with-hdf5-fortran-bindings=1
                               --with-zlib-dir=${TPL_INSTALL_PREFIX}
                               ${petsc_lapack_option}
                               ${petsc_blas_option}
                               ${petsc_package_flags}
+                              PETSC_DIR=${PETSc_source_dir}
                     # -- Build
                     BINARY_DIR       ${PETSc_build_dir}           # Build directory 
                     BUILD_COMMAND    $(MAKE) -j 1 PETSC_DIR=${PETSc_source_dir} # Run the CMake script to build
