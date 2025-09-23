@@ -77,6 +77,41 @@ include(BuildLibraryName)
 if ( ${CMAKE_BUILD_TYPE} STREQUAL "Debug" )
   build_library_name(hdf5_debug HDF5_C_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
   build_library_name(hdf5_hl_debug HDF5_HL_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
+   
+  # Create a symbolic link for hdf5_debug libs, without checking if exists, 
+  # because Silo, PETSc, amanzi-geochemistry, etc
+  # would be configured with dependencies of hard-coded lib name of 'hdf5'.   
+  if (BUILD_SHARED_LIBS)
+    if(NOT EXISTS "${TPL_INSTALL_PREFIX}/lib/libhdf5.dylib")
+      execute_process(
+            COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_debug.dylib"
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5.dylib"
+      )
+    endif()
+    if(NOT EXISTS "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl.dylib")
+      execute_process(
+            COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl_debug.dylib"
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl.dylib"
+      )
+    endif()
+    if(NOT EXISTS "${TPL_INSTALL_PREFIX}/lib/libhdf5_fortran.dylib")
+      execute_process(
+            COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_fortran_debug.dylib"
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_fortran.dylib"
+      )
+    endif()
+    if(NOT EXISTS "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl_fortran.dylib")
+      execute_process(
+            COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl_fortran_debug.dylib"
+                    "${TPL_INSTALL_PREFIX}/lib/libhdf5_hl_fortran.dylib"
+      )
+    endif()
+  endif()
+
 else()
   build_library_name(hdf5 HDF5_C_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
   build_library_name(hdf5_hl HDF5_HL_LIBRARY APPEND_PATH ${TPL_INSTALL_PREFIX}/lib)
