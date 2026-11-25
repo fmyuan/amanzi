@@ -11,6 +11,11 @@ function(Create_Imported_Target_File output)
 
   macro(WRITE_TARGET target type)
     file(APPEND ${output} "\n# Import target \"${target}\"\n")
+    
+    # guard target to be imported to aovid duplication (if...endif() block starting)
+    # if block starts here, but endif() in the below. Be cautious here.
+    file(APPEND ${output} "\nif (NOT TARGET \"${target}\")\n")
+    
     file(APPEND ${output} "ADD_LIBRARY(${target} ${type} IMPORTED)\n")
   endmacro(WRITE_TARGET)
 
@@ -32,6 +37,9 @@ function(Create_Imported_Target_File output)
     set(_write_string "${_write_string})\n")
 
     file(APPEND ${output} "${_write_string}")
+
+    # guard target to be imported to aovid duplication (if...endif() block ending)
+    file(APPEND ${output} "endif()\n")
 
   endmacro(WRITE_TARGET_PROPERTIES)
 
